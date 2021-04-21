@@ -28,15 +28,15 @@ spec = do
     describe "validarSegundoDigito" $ do
         context "quando passado um CPF com segundo digito valido" $ do
             it "valida o CPF" $ do
-                validarSegundoDigito "51171591870" `shouldBe` True
+                validarSegundoDigito "63683260505" `shouldBe` True
         context "quando passado um CPF com segundo digito invalido" $ do
             it "invalida o CPF" $ do
-                validarSegundoDigito "51171591879" `shouldBe` False
+                validarSegundoDigito "96600026881" `shouldBe` False
 
     describe "valido" $ do
         context "quando passado um CPF valido" $ do
             it "valida o CPF" $ do
-                valido "51171591870" `shouldBe` True
+                valido "63683260505" `shouldBe` True
         context "quando passado um CPF com primeiro digito invalido e segundo valido" $ do
             it "invalida o CPF" $ do
                 valido "51171591890" `shouldBe` False
@@ -51,10 +51,13 @@ spec = do
     describe "validarDigito" $ do
         context "quando solicita validacao do 10o digito" $ do
             it "valida o digito" $ do
-                validarDigito "05080508477" 10 `shouldBe` True 
+                validarDigito "51171591870" 10 `shouldBe` True
+        context "quando solicita validacao do 11o digito" $ do
+            it "valida o digito" $ do
+                validarDigito "63683260505" 11 `shouldBe` True
         context "quando solicita um digito invalido" $ do
             prop "invalida o CPF" $ do
-                \x -> x /= 10 && x /= 11 ==> validarDigito "05080508477" x `shouldBe` False
+                \x -> x /= 10 && x /= 11 ==> validarDigito "51171591899" x `shouldBe` False
 
     exemplos <- runIO lerExemplos
     forM_ exemplos $ \cpf ->
